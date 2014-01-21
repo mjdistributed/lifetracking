@@ -6,20 +6,29 @@
   </head>
   <body>
     {% for datum in data %}
+      <hr>
       {% if datum.author %}
         Data for <b>{{ datum.author.nickname() }}</b> on {{ datum.date }}
       {% else %}
        Data for anonymous on data.date:
       {% endif %}
-      <blockquote>coffee: {{ datum.cupsCoffee }} | water: {{ datum.cupsWater }}</blockquote>
+      <blockquote>steps: {{ datum.steps }} | miles run: {{ datum.milesRun }} | cups of coffee: {{ datum.cupsCoffee }} | cups of tea: {{ datum.cupsTea}} | cups of water: {{ datum.cupsWater }} | food healthiness (1-5): {{ datum.foodHealthiness}} | $ spent: {{ datum.dollarsSpent}} | mood: {{ datum.mood}} | productivity (1-5): {{ datum.productivity }} | energy (1-5): {{ datum.energy }}</blockquote>
+
     {% endfor %}
 
     <hr>
 
     <form action="/sign?db_name={{ db_name }}" method="post">
       <div>
-        cups of coffee:<textarea name="coffee" rows="1" cols="2"></textarea>
-        cups of water:<textarea name="water" rows="1" cols="2"></textarea>
+        steps:<textarea name="steps" rows="1" cols="2"></textarea>
+        miles run:<textarea name="milesRun" rows="1" cols="2"></textarea>
+        cups of coffee:<textarea name="cupsCoffee" rows="1" cols="2"></textarea>
+        cups of water:<textarea name="cupsWater" rows="1" cols="2"></textarea>
+        food healthiness:<textarea name="foodHealthiness" rows="1" cols="1"></textarea> 
+        dollars spent:<textarea name="dollarsSpent" rows="1" cols="4"></textarea>
+        mood:<textarea name="mood" rows="1" cols="1"></textarea>
+        productivity:<textarea name="productivity" rows="1" cols="1"></textarea>
+        energy:<textarea name="energy" rows="1" cols="1"></textarea>
       </div>
       <div><input type="submit" value="Send Data"></div>
     </form>

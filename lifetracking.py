@@ -28,8 +28,15 @@ def data_key(db_name=DEFAULT_DB_NAME):
 class Data(ndb.Model):
     """Models an individual Data entry with author, content, and date."""
     author = ndb.UserProperty()
+    steps = ndb.IntegerProperty(indexed=False)
+    milesRun = ndb.FloatProperty(indexed=False)
     cupsCoffee = ndb.IntegerProperty(indexed=False)
     cupsWater = ndb.IntegerProperty(indexed=False)
+    foodHealthiness = ndb.IntegerProperty(indexed=False)
+    dollarsSpent = ndb.FloatProperty(indexed=False)
+    mood = ndb.IntegerProperty(indexed=False)
+    productivity = ndb.IntegerProperty(indexed=False)
+    energy = ndb.IntegerProperty(indexed=False)
     date = ndb.DateTimeProperty(auto_now_add=True)
 
 
@@ -72,8 +79,15 @@ class LifeTracking(webapp2.RequestHandler):
             data.author = users.get_current_user()
 
         content = self.request.get('content').split()
-        data.cupsCoffee = int(self.request.get('coffee'))
-        data.cupsWater = int(self.request.get('water'))
+        data.steps = int(self.request.get('steps'))
+        data.milesRun = float(self.request.get('milesRun'))
+        data.cupsCoffee = int(self.request.get('cupsCoffee'))
+        data.cupsWater = int(self.request.get('cupsWater'))
+        data.foodHealthiness = int(self.request.get('foodHealthiness'))
+        data.dollarsSpent = float(self.request.get('dollarsSpent'))
+        data.mood = int(self.request.get('mood'))
+        data.productivity = int(self.request.get('productivity'))
+        data.energy = int(self.request.get('energy'))
         data.put()
 
         query_params = {'data_name': data_name}
