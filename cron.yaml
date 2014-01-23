@@ -1,0 +1,4 @@
+cron:
+- description: daily email reminder job
+  url: /tasks/email_reminder
+  schedule: every 5 minutes

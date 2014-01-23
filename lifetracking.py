@@ -3,6 +3,7 @@ import urllib
 
 from google.appengine.api import users
 from google.appengine.ext import ndb
+from google.appengine.api import mail
 
 import jinja2
 import webapp2
@@ -93,15 +94,17 @@ class LifeTracking(webapp2.RequestHandler):
         query_params = {'data_name': data_name}
         self.redirect('/?' + urllib.urlencode(query_params))
 
+class EmailReminder(webapp2.RequestHandler):
+
+    def get(self):
+        mail.send_mail(sender="me <mmjbot@gmail.com>",
+              to="Matt Johnson <mmjbot@gmail.com>",
+              subject="Test Email",
+              body="omg yay this is working! Next email coming in 5 minutes")
+
 
 application = webapp2.WSGIApplication([
     ('/', MainPage),
     ('/sign', LifeTracking),
+    ('/tasks/email_reminder', EmailReminder)
 ], debug=True)
-
-from google.appengine.api import mail
-
-mail.send_mail(sender="me <mmjbot@gmail.com>",
-              to="Matt Johnson <mmjbot@gmail.com>",
-              subject="Test Email",
-              body="omg yay this is working")

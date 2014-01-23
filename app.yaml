@@ -7,9 +7,10 @@ threadsafe: true
 handlers:
 - url: /stylesheets
   static_dir: stylesheets
-
 - url: /.*
   script: lifetracking.application
+- url: /tasks/email_reminder
+  login: admin
 
 libraries:
 - name: webapp2
