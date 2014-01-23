@@ -2,4 +2,4 @@ cron:
 - description: daily email reminder job
   url: /tasks/email_reminder
   timezone: America/Chicago
-  schedule: every 5 minutes
+  schedule: every day 18:00
