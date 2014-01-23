@@ -8,6 +8,7 @@ handlers:
 - url: /stylesheets
   static_dir: stylesheets
 - url: /tasks/email_reminder
+  script: lifetracking.application
   login: admin
 
 - url: /.*
