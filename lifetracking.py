@@ -110,11 +110,11 @@ class EmailReminder(webapp2.RequestHandler):
             user_set.add(row.author)
         for curr_user in user_set:
             mail.send_mail(sender="me <mmjbot@gmail.com>",
-                  to=curr_user.nickname() + " " + curr_user.email() "Matt Johnson <mmjbot@gmail.com>",
+                  to=curr_user.nickname() + " " + curr_user.email(),
                   subject="Track Your Life!",
                   body="""
                   This is your daily reminder to track your life! Fill out the survey at http://matt-ravi-lifetracking.appspot.com/
-                  ""
+                  """
 
 
 application = webapp2.WSGIApplication([
