@@ -46,7 +46,11 @@ class MainPage(webapp2.RequestHandler):
     def get(self):
         db_name = self.request.get('db_name',DEFAULT_DB_NAME)
         data_query = Data.query(ancestor=data_key(db_name)).order(-Data.date)
+        print("data_query: " + str(data_query))
         data = data_query.fetch(10)
+        print("data: " + str(data))
+
+        
 
         if users.get_current_user():
             url = users.create_logout_url(self.request.uri)
@@ -94,13 +98,23 @@ class LifeTracking(webapp2.RequestHandler):
         query_params = {'data_name': data_name}
         self.redirect('/?' + urllib.urlencode(query_params))
 
+
 class EmailReminder(webapp2.RequestHandler):
 
     def get(self):
-        mail.send_mail(sender="me <mmjbot@gmail.com>",
-              to="Matt Johnson <mmjbot@gmail.com>",
-              subject="Test Email",
-              body="omg yay this is working! Next email coming in 5 minutes")
+        """email reminders to each user to log their daily data"""
+        db_name = self.request.get('db_name',DEFAULT_DB_NAME)
+        data_query = Data.query(ancestor=data_key(db_name)).order(-Data.date)
+        user_set = set()
+        for row in data_query:
+            user_set.add(row.author)
+        for curr_user in user_set:
+            mail.send_mail(sender="me <mmjbot@gmail.com>",
+                  to=curr_user.nickname() + " " + curr_user.email() "Matt Johnson <mmjbot@gmail.com>",
+                  subject="Track Your Life!",
+                  body="""
+                  This is your daily reminder to track your life! Fill out the survey at http://matt-ravi-lifetracking.appspot.com/
+                  ""
 
 
 application = webapp2.WSGIApplication([
