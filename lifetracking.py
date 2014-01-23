@@ -114,7 +114,7 @@ class EmailReminder(webapp2.RequestHandler):
                   subject="Track Your Life!",
                   body="""
                   This is your daily reminder to track your life! Fill out the survey at http://matt-ravi-lifetracking.appspot.com/
-                  """
+                  """)
 
 
 application = webapp2.WSGIApplication([
