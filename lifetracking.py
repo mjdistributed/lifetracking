@@ -98,3 +98,10 @@ application = webapp2.WSGIApplication([
     ('/', MainPage),
     ('/sign', LifeTracking),
 ], debug=True)
+
+from google.appengine.api import mail
+
+mail.send_mail(sender="me <mmjbot@gmail.com>",
+              to="Matt Johnson <mmjbot@gmail.com>",
+              subject="Test Email",
+              body="omg yay this is working")
