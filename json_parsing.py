@@ -44,20 +44,31 @@ class Weather(colander.MappingSchema):
 	dewpointC = colander.SchemaNode(colander.Int())
 	visibilityKM = colander.SchemaNode(colander.Decimal())
 
-class Snapshot(colander.MappingSchema):
-	battery = colander.SchemaNode(colander.Float(), validator = colander.Range(0,1))
-	location = Location()
-	steps = colander.SchemaNode(colander.Int(), validator = colander.Range(0,9999))
-	day = colander.SchemaNode(colander.Int(), validator = colander.Range(0, 599999999))
-	audio = Audio()
-	sync = colander.SchemaNode(colander.Int(), validator = colander.Range(0 ,1))
-	connection = colander.SchemaNode(colander.Int(), validator = colander.Range(0, 1))
-	background = colander.SchemaNode(colander.Int(), validator = colander.Range(0, 1))
-	dwellStatus = colander.SchemaNode(colander.Int(), validator = colander.Range(0, 1))
-	draft = colander.SchemaNode(colander.Int(), validator = colander.Range(0, 1))
-	weather = Weather()
-	# date = colander.SchemaNode(colander.DateTime())
+class Response(colander.MappingSchema):
+  questionPrompt = colander.SchemaNode(colander.String())
+  numericResponse = colander.SchemaNode(colander.Int(), missing = "")
+  textResponse = colander.SchemaNode(colander.String(), missing = "")
 
+class Responses(colander.SequenceSchema):
+  response = Response()
+  
+
+
+class Snapshot(colander.MappingSchema):
+  battery = colander.SchemaNode(colander.Float(), validator = colander.Range(0,1))
+  location = Location()
+  steps = colander.SchemaNode(colander.Int(), validator = colander.Range(0,9999))
+  day = colander.SchemaNode(colander.Int(), validator = colander.Range(0, 599999999))
+  audio = Audio()
+  sync = colander.SchemaNode(colander.Int(), validator = colander.Range(0 ,1))
+  connection = colander.SchemaNode(colander.Int(), validator = colander.Range(0, 1))
+  background = colander.SchemaNode(colander.Int(), validator = colander.Range(0, 1))
+  dwellStatus = colander.SchemaNode(colander.Int(), validator = colander.Range(0, 1))
+  draft = colander.SchemaNode(colander.Int(), validator = colander.Range(0, 1))
+  weather = Weather()
+  responses = Responses()
+  # date = colander.SchemaNode(colander.DateTime())
+  
 
 
 class Data(colander.SequenceSchema):
@@ -119,7 +130,17 @@ cstruct = {
         "uv" : 0,
         "dewpointC" : 3,
         "visibilityKM" : 16.1
-      }
+      },
+      "responses" : [
+        {
+          "numericResponse" : "2",
+          "questionPrompt" : "How many coffees did you have today?"
+        },
+        {
+          "questionPrompt" : "What did you learn today?",
+          "textResponse" : "Plan ahead well. Guiding others is rewarding. "
+        }
+      ]
      }
 
 schema = Snapshot()
