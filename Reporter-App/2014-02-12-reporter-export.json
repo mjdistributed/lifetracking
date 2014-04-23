@@ -1,0 +1,246 @@
+{
+  "snapshots" : [
+    {
+      "battery" : 0.8,
+      "location" : {
+        "verticalAccuracy" : 10,
+        "timestamp" : 413881933.955704,
+        "longitude" : -95.40413179975363,
+        "latitude" : 29.72951552883064,
+        "course" : 0,
+        "placemark" : {
+          "thoroughfare" : "Banks St",
+          "postalCode" : "77098",
+          "subAdministrativeArea" : "Harris",
+          "subLocality" : "Boulevard Oaks",
+          "subThoroughfare" : "1749",
+          "locality" : "Houston",
+          "name" : "1749 Banks St",
+          "country" : "United States",
+          "administrativeArea" : "TX"
+        },
+        "horizontalAccuracy" : 65,
+        "speed" : -1
+      },
+      "steps" : 832,
+      "day" : 413877600,
+      "audio" : {
+        "avg" : -53.17971,
+        "peak" : -46.83567
+      },
+      "photoSet" : {
+        "photos" : [
+          {
+            "meteringMode" : 3,
+            "brightnessValue" : 0.1769913,
+            "focalLengthIn35mm" : 30,
+            "longitudeRef" : "W",
+            "sceneCaptureType" : 0,
+            "exposureMode" : 0,
+            "resolutionUnit" : 2,
+            "make" : "Apple",
+            "software" : "7.0.4",
+            "assetUrl" : "assets-library:\/\/asset\/asset.JPG?id=6C2397AF-28C8-49FF-95E1-1F600B891825&ext=JPG",
+            "isoSpeed" : 320,
+            "exposureTime" : 0.05882353,
+            "shutterSpeed" : 4.09989,
+            "depth" : 8,
+            "latitude" : 29.72953,
+            "fNumber" : 2.2,
+            "sensingMode" : 2,
+            "longitude" : 95.40417,
+            "apertureValue" : 2.275007,
+            "latitudeRef" : "N",
+            "focalLength" : 4.12,
+            "altitude" : 15.32293,
+            "exposureProgram" : 2,
+            "model" : "iPhone 5s",
+            "dateTime" : 413877947.415578,
+            "pixelWidth" : 3264,
+            "flash" : 0,
+            "orientation" : 6,
+            "pixelHeight" : 2448,
+            "whiteBalance" : 0
+          }
+        ]
+      },
+      "sync" : 0,
+      "connection" : 1,
+      "background" : 0,
+      "dwellStatus" : 0,
+      "draft" : 0,
+      "weather" : {
+        "windMPH" : 14,
+        "windDirection" : "WSW",
+        "tempF" : 35,
+        "precipTodayIn" : 0,
+        "windGustKPH" : 22.5,
+        "feelslikeC" : -3,
+        "visibilityMi" : 10,
+        "feelslikeF" : 26,
+        "stationID" : "KTXHOUST256",
+        "latitude" : 29.730955,
+        "windGustMPH" : 14,
+        "pressureIn" : 30.09,
+        "pressureMb" : 1019,
+        "relativeHumidity" : "98%",
+        "longitude" : -95.43055,
+        "precipTodayMetric" : 0,
+        "windKPH" : 22.5,
+        "windDegrees" : 247,
+        "tempC" : 1.7,
+        "weather" : "Overcast",
+        "uv" : 0,
+        "dewpointC" : 1,
+        "visibilityKM" : 16.1
+      },
+      "date" : 413881933.122279,
+      "responses" : [
+        {
+          "numericResponse" : "1",
+          "questionPrompt" : "How many coffees did you have today?"
+        },
+        {
+          "questionPrompt" : "What did you learn today?",
+          "textResponse" : "Don't burn out"
+        }
+      ]
+    },
+    {
+      "battery" : 0.8,
+      "location" : {
+        "verticalAccuracy" : 10,
+        "timestamp" : 413914897.783979,
+        "longitude" : -95.40199030229346,
+        "latitude" : 29.71153491816923,
+        "course" : 0,
+        "placemark" : {
+          "thoroughfare" : "Travis St",
+          "postalCode" : "77030",
+          "subAdministrativeArea" : "Harris",
+          "subLocality" : "University Place",
+          "subThoroughfare" : "6501–6599",
+          "locality" : "Houston",
+          "name" : "6501–6599 Travis St",
+          "country" : "United States",
+          "administrativeArea" : "TX"
+        },
+        "horizontalAccuracy" : 65,
+        "speed" : -1
+      },
+      "steps" : 361,
+      "day" : 413877600,
+      "audio" : {
+        "avg" : -39.9158,
+        "peak" : -29.10371
+      },
+      "sync" : 0,
+      "connection" : 1,
+      "background" : 0,
+      "dwellStatus" : 0,
+      "draft" : 0,
+      "weather" : {
+        "windMPH" : 12,
+        "windDirection" : "NNW",
+        "tempF" : 36,
+        "precipTodayIn" : 0,
+        "windGustKPH" : 35,
+        "feelslikeC" : -2,
+        "visibilityMi" : 10,
+        "feelslikeF" : 28,
+        "stationID" : "KMCJ",
+        "latitude" : 29.71402931,
+        "windGustMPH" : 22,
+        "pressureIn" : 30.14,
+        "pressureMb" : 1020,
+        "relativeHumidity" : "87%",
+        "longitude" : -95.39501953,
+        "precipTodayMetric" : 0,
+        "windKPH" : 18,
+        "windDegrees" : 340,
+        "tempC" : 2,
+        "weather" : "Overcast",
+        "uv" : 1,
+        "dewpointC" : 0,
+        "visibilityKM" : 16.1
+      },
+      "date" : 413914896.986844,
+      "responses" : [
+        {
+          "questionPrompt" : "How did you sleep?",
+          "answeredOptions" : [
+            "Ok"
+          ]
+        }
+      ]
+    },
+    {
+      "battery" : 0.8,
+      "location" : {
+        "verticalAccuracy" : 10,
+        "timestamp" : 413914910.842805,
+        "longitude" : -95.40197709367516,
+        "latitude" : 29.71153696977722,
+        "course" : 0,
+        "placemark" : {
+          "thoroughfare" : "Travis St",
+          "postalCode" : "77030",
+          "subAdministrativeArea" : "Harris",
+          "subLocality" : "University Place",
+          "subThoroughfare" : "6501–6599",
+          "locality" : "Houston",
+          "name" : "6501–6599 Travis St",
+          "country" : "United States",
+          "administrativeArea" : "TX"
+        },
+        "horizontalAccuracy" : 65,
+        "speed" : -1
+      },
+      "steps" : 0,
+      "day" : 413877600,
+      "audio" : {
+        "avg" : -52.05278,
+        "peak" : -44.09353
+      },
+      "sync" : 0,
+      "connection" : 1,
+      "background" : 0,
+      "dwellStatus" : 0,
+      "draft" : 0,
+      "weather" : {
+        "windMPH" : 12,
+        "windDirection" : "NNW",
+        "tempF" : 36,
+        "precipTodayIn" : 0,
+        "windGustKPH" : 35,
+        "feelslikeC" : -2,
+        "visibilityMi" : 10,
+        "feelslikeF" : 28,
+        "stationID" : "KMCJ",
+        "latitude" : 29.71402931,
+        "windGustMPH" : 22,
+        "pressureIn" : 30.14,
+        "pressureMb" : 1020,
+        "relativeHumidity" : "87%",
+        "longitude" : -95.39501953,
+        "precipTodayMetric" : 0,
+        "windKPH" : 18,
+        "windDegrees" : 340,
+        "tempC" : 2,
+        "weather" : "Overcast",
+        "uv" : 1,
+        "dewpointC" : 0,
+        "visibilityKM" : 16.1
+      },
+      "date" : 413914910.694986,
+      "responses" : [
+        {
+          "questionPrompt" : "How did you sleep?",
+          "answeredOptions" : [
+            "Ok"
+          ]
+        }
+      ]
+    }
+  ]
+}

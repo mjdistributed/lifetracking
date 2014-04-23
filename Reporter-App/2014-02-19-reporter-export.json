@@ -1,0 +1,158 @@
+{
+  "snapshots" : [
+    {
+      "battery" : 0.6,
+      "location" : {
+        "verticalAccuracy" : 10,
+        "timestamp" : 414534746.041693,
+        "longitude" : -95.40197205142475,
+        "latitude" : 29.71102791455773,
+        "course" : 0,
+        "placemark" : {
+          "thoroughfare" : "Main St",
+          "postalCode" : "77030",
+          "subAdministrativeArea" : "Harris",
+          "subLocality" : "University Place",
+          "subThoroughfare" : "6500",
+          "locality" : "Houston",
+          "name" : "6500 Main St",
+          "country" : "United States",
+          "administrativeArea" : "TX"
+        },
+        "horizontalAccuracy" : 65,
+        "speed" : -1
+      },
+      "steps" : 17846,
+      "day" : 414482400,
+      "audio" : {
+        "avg" : -47.78549,
+        "peak" : -42.66655
+      },
+      "photoSet" : {
+        "photos" : [
+          {
+            "brightnessValue" : 0,
+            "meteringMode" : 0,
+            "focalLengthIn35mm" : 0,
+            "sceneCaptureType" : 0,
+            "exposureMode" : 0,
+            "resolutionUnit" : 0,
+            "assetUrl" : "assets-library:\/\/asset\/asset.PNG?id=4E2E27C2-CE6E-4451-A69C-1323AA3936F5&ext=PNG",
+            "isoSpeed" : 0,
+            "exposureTime" : 0,
+            "shutterSpeed" : 0,
+            "depth" : 8,
+            "latitude" : 0,
+            "fNumber" : 0,
+            "sensingMode" : 0,
+            "longitude" : 0,
+            "apertureValue" : 0,
+            "focalLength" : 0,
+            "altitude" : 0,
+            "exposureProgram" : 0,
+            "pixelWidth" : 640,
+            "dateTime" : 414481221,
+            "flash" : 0,
+            "pixelHeight" : 1136,
+            "whiteBalance" : 0
+          }
+        ]
+      },
+      "sync" : 0,
+      "connection" : 1,
+      "background" : 0,
+      "dwellStatus" : 0,
+      "draft" : 0,
+      "weather" : {
+        "windMPH" : 12,
+        "windDirection" : "South",
+        "tempF" : 77,
+        "precipTodayIn" : 0,
+        "windGustKPH" : 37,
+        "feelslikeC" : 25,
+        "visibilityMi" : 10,
+        "feelslikeF" : 77,
+        "stationID" : "KMCJ",
+        "latitude" : 29.71402931,
+        "windGustMPH" : 23,
+        "pressureIn" : 29.85,
+        "pressureMb" : 1011,
+        "relativeHumidity" : "61%",
+        "longitude" : -95.39501953,
+        "precipTodayMetric" : 0,
+        "windKPH" : 18,
+        "windDegrees" : 170,
+        "tempC" : 25,
+        "weather" : "Mostly Cloudy",
+        "uv" : 3,
+        "dewpointC" : 17,
+        "visibilityKM" : 16.1
+      },
+      "date" : 414534745.407291,
+      "responses" : [
+        {
+          "questionPrompt" : "How productive are you right now",
+          "answeredOptions" : [
+            "Crunching"
+          ]
+        },
+        {
+          "questionPrompt" : "How do you feel",
+          "answeredOptions" : [
+            "OK"
+          ]
+        },
+        {
+          "questionPrompt" : "Do you have to do what you are doing? ",
+          "answeredOptions" : [
+            "No"
+          ]
+        },
+        {
+          "questionPrompt" : "Do you want to do what you are doing? ",
+          "answeredOptions" : [
+            "Yes"
+          ]
+        },
+        {
+          "questionPrompt" : "How happy are you?",
+          "answeredOptions" : [
+            "A little happy"
+          ]
+        },
+        {
+          "numericResponse" : "2",
+          "questionPrompt" : "When was the last time you ate (hours)"
+        },
+        {
+          "questionPrompt" : "Are you working?",
+          "answeredOptions" : [
+            "Yes"
+          ]
+        },
+        {
+          "questionPrompt" : "What are you doing?",
+          "tokens" : [
+            "Lab"
+          ]
+        },
+        {
+          "questionPrompt" : "Where are you?",
+          "locationResponse" : {
+            "text" : "Bioscience Research Collaborative",
+            "location" : {
+              "verticalAccuracy" : -1,
+              "timestamp" : 413587018.581312,
+              "longitude" : -95.40202087807303,
+              "latitude" : 29.71125325345107,
+              "course" : 0,
+              "horizontalAccuracy" : 0,
+              "speed" : -1
+            },
+            "foursquareVenueId" : "4b0720caf964a520cff722e3"
+          }
+        }
+      ]
+    }
+  ]
+}
