@@ -6,7 +6,9 @@ from json_parsing import *
 import matplotlib.pyplot as plt
 import math
 import numpy as np
-#import ols 	#SciPy Ordinary Least Squares
+from ols_0_2 import ols 	#SciPy Ordinary Least Squares
+from array import array
+from numpy import array as nparray
 
 # directory = "Reporter-App"
 # dates = ['2014-02-08', '2014-02-09', "2014-02-10", "2014-02-11", "2014-02-12", "2014-02-13", "2014-02-14", "2014-02-17", "2014-02-19", "2014-02-20", "2014-02-27", "2014-03-03", "2014-03-09", "2014-03-13", "2014-03-14", "2014-03-15", "2014-03-16", "2014-03-17", "2014-03-18"]
@@ -94,7 +96,7 @@ def guess_optimums(x_vars, y_vars):
 	return(range(int(x0),int(math.ceil(x1))), estimated_y)
 
 # return a mapping of multiple independent variables to one dependent variable
-def get_multiple_regression_vars(query_x_vals):
+def get_multiple_regression_vars(query_x_vals, query_x_vals_sub_field_names):
 	#aggregate data
 	vals = list() # list of (x,y) pairs
 	for date in dates:		
@@ -109,8 +111,11 @@ def get_multiple_regression_vars(query_x_vals):
 				continue 	# only care about the ones where we reported productivity
 			curr_x_vals = list()
 			to_break = False
-			for x in query_x_vals:
-				x_val = snap.__getattr__(x)
+			for i in range(len(query_x_vals)):
+				x_val = snap.__getattr__(query_x_vals[i])
+				sub_field_name = query_x_vals_sub_field_names[i]
+				if(sub_field_name != ""):
+					x_val = x_val.__getattr__(sub_field_name)
 				if(type(x_val) is colander._drop):
 					to_break = true # only care about the ones where we reported our query variable
 					break
@@ -124,13 +129,17 @@ def get_multiple_regression_vars(query_x_vals):
 
 # find a best-fit for one dependent variable and more than one independent variable
 def multiple_regression(x_vars, y_vars):
-	
+	print(x_vars)
+	print(y_vars)
+	mymodel = ols(nparray(y_vars),nparray(x_vars),"Working_YN_Responses",["battery", "audio"])
+	print(mymodel.summary())	
 
 
 
 
-(x_vals, y_vals) = get_multiple_regression_vars(list(["battery", "steps"]))
+(x_vals, y_vals) = get_multiple_regression_vars(list(["battery", "audio"]), list(["", "avg"]))
 print(str(x_vals) + "\n" + str(y_vals)) 
+multiple_regression(map(lambda x: (x[0], x[1]), x_vals), map(lambda x: 1 if x == "Yes" else 0, y_vals))
 # (x_vals,y_vals) = separate_vals(analyze_firstOrder("battery"))
 # (x, test_y) = guess_optimums(x_vals, y_vals)
 # print(test_y[2])
