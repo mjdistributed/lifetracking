@@ -6,9 +6,13 @@ from json_parsing import *
 import matplotlib.pyplot as plt
 import math
 import numpy as np
+#import ols 	#SciPy Ordinary Least Squares
 
-directory = "Reporter-App"
-dates = ['2014-02-08', '2014-02-09', "2014-02-10", "2014-02-11", "2014-02-12", "2014-02-13", "2014-02-14", "2014-02-17", "2014-02-19", "2014-02-20", "2014-02-27", "2014-03-03", "2014-03-09", "2014-03-13", "2014-03-14", "2014-03-15", "2014-03-16", "2014-03-17", "2014-03-18"]
+# directory = "Reporter-App"
+# dates = ['2014-02-08', '2014-02-09', "2014-02-10", "2014-02-11", "2014-02-12", "2014-02-13", "2014-02-14", "2014-02-17", "2014-02-19", "2014-02-20", "2014-02-27", "2014-03-03", "2014-03-09", "2014-03-13", "2014-03-14", "2014-03-15", "2014-03-16", "2014-03-17", "2014-03-18"]
+directory = "karina_data"
+dates = ["CLEANED-karina_jun1"]
+# dates = ["copy"]
 
 
 def first_order(var_name, sub_field_name):
@@ -23,9 +27,10 @@ def first_order(var_name, sub_field_name):
 			if not filter(lambda x : x.questionPrompt == "Are you working?", snap.responses):
 				continue 	# only care about the ones where we reported productivity
 			x_val = snap.__getattr__(var_name)
-			print(x_val)
 			if(sub_field_name != ""):
 				x_val = x_val.__getattr__(sub_field_name)
+			if(type(x_val) is colander._drop):
+				continue # only care about the ones where we reported our query variable
 			y_val = filter(lambda x : x.questionPrompt == "Are you working?", snap.responses)[0].answeredOptions[0]
 			vals.append((x_val,y_val))
 	return vals
@@ -38,7 +43,8 @@ def standardize(correlation, bucket_size):
 		y_val = 1 if tup[1] == 'Yes' else 0
 		new_correlation.append((x_val, y_val))
 	x_vals = set(map(lambda tup: tup[0], new_correlation))
-	buckets = np.arange(min(x_vals), max(x_vals)+bucket_size, bucket_size)
+	print(x_vals)
+	buckets = np.arange(min(x_vals), max(x_vals), bucket_size)
 	standardized = list()
 	for x in buckets: # create a histogram of how many times each x value created a "yes" response
 		num_success = len(filter(lambda tup: (tup[0] >= x) and (tup[0] < (x+bucket_size)) and (tup[1] == 1), new_correlation))
@@ -60,7 +66,9 @@ def plot(correlation):
 
 def analyze_firstOrder(field, subfield="", bucket_size=1):
 	correlation = first_order(field, subfield)
+	print(correlation)
 	correlation = standardize(correlation, bucket_size)
+	print(correlation)
 	plot(correlation)
 	return correlation
 
@@ -85,10 +93,47 @@ def guess_optimums(x_vars, y_vars):
 	plt.show()
 	return(range(int(x0),int(math.ceil(x1))), estimated_y)
 
+# return a mapping of multiple independent variables to one dependent variable
+def get_multiple_regression_vars(query_x_vals):
+	#aggregate data
+	vals = list() # list of (x,y) pairs
+	for date in dates:		
+		curr_file = open(directory + "/" + date + "-reporter-export.json")
+		curr_str = curr_file.read()
+		curr_data = json.loads(curr_str)
+		curr = Data.deserialize(curr_data)
+		x_vals = list()	# will be multi-dimensional array of x-values
+		y_vals = list()	# array of y-values
+		for snap in curr.snapshots:
+			if not filter(lambda x : x.questionPrompt == "Are you working?", snap.responses):
+				continue 	# only care about the ones where we reported productivity
+			curr_x_vals = list()
+			to_break = False
+			for x in query_x_vals:
+				x_val = snap.__getattr__(x)
+				if(type(x_val) is colander._drop):
+					to_break = true # only care about the ones where we reported our query variable
+					break
+				curr_x_vals.append(x_val)
+			if(to_break):
+				continue
+			x_vals.append(curr_x_vals)
+			y_val = filter(lambda x : x.questionPrompt == "Are you working?", snap.responses)[0].answeredOptions[0]
+			y_vals.append(y_val)
+	return (x_vals, y_vals)
+
+# find a best-fit for one dependent variable and more than one independent variable
+def multiple_regression(x_vars, y_vars):
 	
-(x_vals,y_vals) = separate_vals(analyze_firstOrder("weather", subfield="tempF", bucket_size=5))
-(x, test_y) = guess_optimums(x_vals, y_vals)
-print(test_y[2])
+
+
+
+
+(x_vals, y_vals) = get_multiple_regression_vars(list(["battery", "steps"]))
+print(str(x_vals) + "\n" + str(y_vals)) 
+# (x_vals,y_vals) = separate_vals(analyze_firstOrder("battery"))
+# (x, test_y) = guess_optimums(x_vals, y_vals)
+# print(test_y[2])
 # analyze_firstOrder("weather", subfield="tempF", bucket_size=5)
 # analyze_firstOrder("battery", bucket_size=0.1)
 # correlation = [(1, "Yes"), (2,"No"), (3,"Yes"), (4,"Yes")]
