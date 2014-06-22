@@ -9,6 +9,7 @@ import numpy as np
 from ols_0_2 import ols 	#SciPy Ordinary Least Squares
 from array import array
 from numpy import array as nparray
+import statsmodels.api as sm
 
 # directory = "Reporter-App"
 # dates = ['2014-02-08', '2014-02-09', "2014-02-10", "2014-02-11", "2014-02-12", "2014-02-13", "2014-02-14", "2014-02-17", "2014-02-19", "2014-02-20", "2014-02-27", "2014-03-03", "2014-03-09", "2014-03-13", "2014-03-14", "2014-03-15", "2014-03-16", "2014-03-17", "2014-03-18"]
@@ -132,14 +133,24 @@ def multiple_regression(x_vars, y_vars):
 	print(x_vars)
 	print(y_vars)
 	mymodel = ols(nparray(y_vars),nparray(x_vars),"Working_YN_Responses",["battery", "audio"])
-	print(mymodel.summary())	
+	print(mymodel.summary())
+	print(mymodel.b);
+
+# using Statsmodels API
+def alternative_multiple_regression(x_vars, y_vars):
+	x_vars = sm.add_constant(x_vars)
+	est = sm.OLS(y_vars, x_vars)
+	est = est.fit()
+	print(est.summary())
 
 
 
 
 (x_vals, y_vals) = get_multiple_regression_vars(list(["battery", "audio"]), list(["", "avg"]))
-print(str(x_vals) + "\n" + str(y_vals)) 
-multiple_regression(map(lambda x: (x[0], x[1]), x_vals), map(lambda x: 1 if x == "Yes" else 0, y_vals))
+x_vals = map(lambda x: (x[0], x[1]), x_vals)
+y_vals = map(lambda x: 1 if x == "Yes" else 0, y_vals)
+multiple_regression(x_vals, y_vals)
+alternative_multiple_regression(x_vals, y_vals)
 # (x_vals,y_vals) = separate_vals(analyze_firstOrder("battery"))
 # (x, test_y) = guess_optimums(x_vals, y_vals)
 # print(test_y[2])
