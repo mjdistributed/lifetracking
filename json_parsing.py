@@ -43,7 +43,10 @@ class Weather(colander.MappingSchema):
 	weather = colander.SchemaNode(colander.String(), missing=colander.drop)
 	uv = colander.SchemaNode(colander.Int(), missing=colander.drop)
 	dewpointC = colander.SchemaNode(colander.Int(), missing=colander.drop)
-	visibilityKM = colander.SchemaNode(colander.Decimal(), missing = colander.drop)
+	visibilityKM = colander.SchemaNode(colander.Decimal(), missing=colander.drop)
+	visibilityMi = colander.SchemaNode(colander.Decimal(), missing=colander.drop)
+	feelsLikeF = colander.SchemaNode(colander.Decimal(), missing=colander.drop)
+	windGustMPH = colander.SchemaNode(colander.Decimal(), missing=colander.drop)
 
 class Response(colander.MappingSchema):
   questionPrompt = colander.SchemaNode(colander.String())
@@ -67,7 +70,7 @@ class Snapshot(colander.MappingSchema):
   draft = colander.SchemaNode(colander.Int(), validator = colander.Range(0, 1))
   weather = Weather(missing=colander.drop)
   responses = Responses(missing=colander.drop)
-  #date = colander.SchemaNode(colander.DateTime())
+  date = colander.SchemaNode(colander.DateTime())
 
 class Snapshots(colander.SequenceSchema):
   snapshot = Snapshot()
