@@ -46,7 +46,6 @@ def standardize(correlation, bucket_size):
 		y_val = 1 if tup[1] == 'Yes' else 0
 		new_correlation.append((x_val, y_val))
 	x_vals = set(map(lambda tup: tup[0], new_correlation))
-	print(x_vals)
 	buckets = np.arange(min(x_vals), max(x_vals), bucket_size)
 	standardized = list()
 	for x in buckets: # create a histogram of how many times each x value created a "yes" response
@@ -69,9 +68,7 @@ def plot(correlation):
 
 def analyze_firstOrder(field, subfield="", bucket_size=1):
 	correlation = first_order(field, subfield)
-	print(correlation)
 	correlation = standardize(correlation, bucket_size)
-	print(correlation)
 	plot(correlation)
 	return correlation
 
@@ -99,14 +96,13 @@ def guess_optimums(x_vars, y_vars):
 # return a mapping of multiple independent variables to one dependent variable
 def get_multiple_regression_vars(query_x_vals, query_x_vals_sub_field_names):
 	#aggregate data
-	vals = list() # list of (x,y) pairs
+	x_vals = list()	# will be multi-dimensional array of x-values
+	y_vals = list()	# array of y-values
 	for date in dates:		
 		curr_file = open(directory + "/" + date + "-reporter-export.json")
 		curr_str = curr_file.read()
 		curr_data = json.loads(curr_str)
 		curr = Data.deserialize(curr_data)
-		x_vals = list()	# will be multi-dimensional array of x-values
-		y_vals = list()	# array of y-values
 		for snap in curr.snapshots:
 			if not filter(lambda x : x.questionPrompt == "Are you working?", snap.responses):
 				continue 	# only care about the ones where we reported productivity
@@ -118,11 +114,8 @@ def get_multiple_regression_vars(query_x_vals, query_x_vals_sub_field_names):
 				if(sub_field_name != ""):
 					x_val = x_val.__getattr__(sub_field_name)
 				if(type(x_val) is colander._drop):
-					to_break = true # only care about the ones where we reported our query variable
-					break
+					x_val = 0
 				curr_x_vals.append(x_val)
-			if(to_break):
-				continue
 			x_vals.append(curr_x_vals)
 			y_val = filter(lambda x : x.questionPrompt == "Are you working?", snap.responses)[0].answeredOptions[0]
 			y_vals.append(y_val)
@@ -136,21 +129,59 @@ def multiple_regression(x_vars, y_vars):
 	print(mymodel.summary())
 	print(mymodel.b);
 
-# using Statsmodels API
+# using Statsmodels API, find a best-fit for one dependent variable and more than one independent variable
+# returns a mapping from field -> scale parameter
 def alternative_multiple_regression(x_vars, y_vars):
 	x_vars = sm.add_constant(x_vars)
 	est = sm.OLS(y_vars, x_vars)
 	est = est.fit()
 	print(est.summary())
+	params = est.params
+	(primary_fields, sub_fields) = get_fields()
+	paramDict = {}
+	for i in range(len(params)):
+		paramDict[primary_fields[i] + "." + sub_fields[i]] = params[i]
+	return paramDict
+
+def get_fields():
+	primary_fields = list(["battery", "location", "location", "steps", "day", "audio", "audio", "sync", "connection", "background", "dwellStatus", "draft", "weather", "weather", "weather", "weather", "weather", "weather", "weather", "weather", "weather", "weather", "weather", "weather"])
+	sub_fields = list(["", "longitude", "latitude", "", "", "avg", "peak", "", "", "", "", "", "windMPH", "tempF", "precipTodayIn", "visibilityMi", "feelsLikeF", "windGustMPH", "pressureIn", "pressureMb", "windKPH", "windDegrees", "uv", "dewpointC"])
+	return (primary_fields, sub_fields)
+
+# takes a list of lists and returns a list of tuples
+def list_to_tuple(x_vars_list):
+	tuples = list()
+	for i in range(len(x_vars_list)):
+		curr_vals = x_vars_list[i]
+		new_tuple = tuple(curr_vals)
+		tuples.append(new_tuple)
+	return tuples
+
+# return the most influential variables, using a mapping from parameter -> scale parameter
+def find_most_influential_vars(paramDict, numTop):
+	# convert dictionary to list of tuples
+	tup_list = list()
+	for key in paramDict.keys():
+		tup_list.append((key, paramDict[key]))
+	# sort this list of tuples
+	sorted_list = sorted(tup_list, lambda (x,y), (a,b): -1 if math.fabs(y) < math.fabs(b) else 1)
+	return sorted_list[len(sorted_list) - numTop:]
 
 
 
 
-(x_vals, y_vals) = get_multiple_regression_vars(list(["battery", "audio"]), list(["", "avg"]))
-x_vals = map(lambda x: (x[0], x[1]), x_vals)
+
+(primary_fields, sub_fields) = get_fields()
+(x_vals, y_vals) = get_multiple_regression_vars(primary_fields, sub_fields)
+x_vals = list_to_tuple(x_vals)
 y_vals = map(lambda x: 1 if x == "Yes" else 0, y_vals)
-multiple_regression(x_vals, y_vals)
-alternative_multiple_regression(x_vals, y_vals)
+paramDict = alternative_multiple_regression(x_vals, y_vals)
+print(paramDict)
+most_influential = find_most_influential_vars(paramDict, 5)
+print(most_influential)
+# print(x_vals)
+# (x_vals, y_vals) = get_multiple_regression_vars(list(["battery", "audio"]), list(["", "avg"]))
+#multiple_regression(x_vals, y_vals)
 # (x_vals,y_vals) = separate_vals(analyze_firstOrder("battery"))
 # (x, test_y) = guess_optimums(x_vals, y_vals)
 # print(test_y[2])
