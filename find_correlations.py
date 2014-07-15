@@ -113,7 +113,7 @@ def get_multiple_regression_vars(query_x_vals, query_x_vals_sub_field_names):
 				sub_field_name = query_x_vals_sub_field_names[i]
 				if(sub_field_name != ""):
 					x_val = x_val.__getattr__(sub_field_name)
-				if(type(x_val) is colander._drop):
+				if(type(x_val) is colander._drop):		# if value doesn't exist in this dataset, just assign value of 0
 					x_val = 0
 				curr_x_vals.append(x_val)
 			x_vals.append(curr_x_vals)
@@ -169,15 +169,13 @@ def find_most_influential_vars(paramDict, numTop):
 
 
 
-
-
 (primary_fields, sub_fields) = get_fields()
 (x_vals, y_vals) = get_multiple_regression_vars(primary_fields, sub_fields)
 x_vals = list_to_tuple(x_vals)
 y_vals = map(lambda x: 1 if x == "Yes" else 0, y_vals)
 paramDict = alternative_multiple_regression(x_vals, y_vals)
 print(paramDict)
-most_influential = find_most_influential_vars(paramDict, 5)
+most_influential = find_most_influential_vars(paramDict, 10)
 print(most_influential)
 # print(x_vals)
 # (x_vals, y_vals) = get_multiple_regression_vars(list(["battery", "audio"]), list(["", "avg"]))
