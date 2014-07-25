@@ -97,7 +97,7 @@ class ReporterFile(ndb.Model):
     """Models an uploaded reporter file."""
     author = ndb.UserProperty()
     filename = ndb.StringProperty()
-    uploaded_file = ndb.BlobProperty()
+    # uploaded_file = ndb.BlobProperty()
     upload_date = ndb.DateTimeProperty(auto_now_add=True)
         
 # [END UploadData]
