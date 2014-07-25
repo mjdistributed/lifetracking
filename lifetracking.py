@@ -14,8 +14,12 @@ import webapp2
 
 
 MAIN_PAGE_FOOTER_TEMPLATE = """\
+    </br></br>
+    <a href="/get_my_data">My Data</a>
+    </br></br>
     <form action = "%s" method="post" enctype="multipart/form-data">
-            Upload File: <input type="file" name="file"><br> 
+            Upload Reporter JSON Export: <br>
+            <input type="file" name="file">
             <input type="submit" name="submit" value="Submit">
     </form>
     <hr>
@@ -23,24 +27,6 @@ MAIN_PAGE_FOOTER_TEMPLATE = """\
   </body>
 </html>
 """
-
-DEFAULT_GUESTBOOK_NAME = 'default_guestbook'
-
-# We set a parent key on the 'Greetings' to ensure that they are all in the same
-# entity group. Queries across the single entity group will be consistent.
-# However, the write rate should be limited to ~1/second.
-
-def guestbook_key(guestbook_name=DEFAULT_GUESTBOOK_NAME):
-    """Constructs a Datastore key for a Guestbook entity with guestbook_name."""
-    return ndb.Key('Guestbook', guestbook_name)
-
-# [START greeting]
-class Greeting(ndb.Model):
-    """Models an individual Guestbook entry."""
-    author = ndb.UserProperty()
-    content = ndb.StringProperty(indexed=False)
-    date = ndb.DateTimeProperty(auto_now_add=True)
-# [END greeting]
 
 # [START main_page]
 class MainPage(webapp2.RequestHandler):
@@ -65,21 +51,25 @@ class MainPage(webapp2.RequestHandler):
 class UploadHandler(blobstore_handlers.BlobstoreUploadHandler):
     def post(self):
         upload_files = self.get_uploads('file')
-        blob_info = upload_files[0]
-        blob_reader = blobstore.BlobReader(blob_info.key())
-        json_data = blob_reader.read()
-        reporter_file = ReporterFile()
-        reporter_file.filename = blob_info.all().get().filename
-        reporter_file.author = users.get_current_user()
-        reporter_file.uploaded_file = json_data
-        reporter_file.put()
-        self.redirect("/get_my_data")
+        if(len(upload_files) > 0):
+            blob_info = upload_files[0]
+            blob_reader = blobstore.BlobReader(blob_info.key())
+            json_data = blob_reader.read()
+            reporter_file = ReporterFile()
+            reporter_file.filename = blob_info.all().get().filename
+            reporter_file.author = users.get_current_user()
+            reporter_file.uploaded_file = json_data
+            reporter_file.put()
+            self.redirect("/get_my_data")
+        else:
+            self.redirect("/")
 # [END UPloadHandler]
 
 
 class GetMyData(webapp2.RequestHandler):
     def get(self):
         self.response.write('<html><body>')
+        self.response.write('<a href="/">Home</a><br><br>')
         user = users.get_current_user()
         if user:
             self.response.write('My Uploaded Data: </br>')
