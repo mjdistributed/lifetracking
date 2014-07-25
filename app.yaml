@@ -1,4 +1,4 @@
-application: lifetracking
+application: matt-ravi-lifetracking
 version: 2
 runtime: python27
 api_version: 1

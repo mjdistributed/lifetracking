@@ -1,4 +1,0 @@
-lifetracking
-============
-
-self improvement
