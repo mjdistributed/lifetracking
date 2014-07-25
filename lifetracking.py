@@ -77,6 +77,7 @@ class UploadHandler(blobstore_handlers.BlobstoreUploadHandler):
         self.redirect("/get_my_data")
 # [END UPloadHandler]
 
+
 class GetMyData(webapp2.RequestHandler):
     def get(self):
         self.response.write('<html><body>')
