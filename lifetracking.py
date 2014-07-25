@@ -1,124 +1,159 @@
 import os
 import urllib
+import cgi
 
 from google.appengine.api import users
 from google.appengine.ext import ndb
 from google.appengine.api import mail
 
+import csv
+from google.appengine.ext import blobstore
+from google.appengine.ext.webapp import blobstore_handlers
+
 import jinja2
 import webapp2
 
 
-JINJA_ENVIRONMENT = jinja2.Environment(
-    loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
-    extensions=['jinja2.ext.autoescape'],
-    autoescape=True)
+MAIN_PAGE_FOOTER_TEMPLATE = """\
+    <form action = "%s" method="post" enctype="multipart/form-data">
+            Upload File: <input type="file" name="file"><br> 
+            <input type="submit" name="submit" value="Submit">
+    </form>
+    <hr>
+    <a href="%s">%s</a>
+  </body>
+</html>
+"""
 
-DEFAULT_DB_NAME = 'db'
+DEFAULT_GUESTBOOK_NAME = 'default_guestbook'
 
-
-# We set a parent key on the 'Data' to ensure that they are all in the same
+# We set a parent key on the 'Greetings' to ensure that they are all in the same
 # entity group. Queries across the single entity group will be consistent.
 # However, the write rate should be limited to ~1/second.
 
-def data_key(db_name=DEFAULT_DB_NAME):
-    """Constructs a Datastore key for a data entity with db_name."""
-    return ndb.Key('Data', db_name)
+def guestbook_key(guestbook_name=DEFAULT_GUESTBOOK_NAME):
+    """Constructs a Datastore key for a Guestbook entity with guestbook_name."""
+    return ndb.Key('Guestbook', guestbook_name)
 
-
-class Data(ndb.Model):
-    """Models an individual Data entry with author, content, and date."""
+# [START greeting]
+class Greeting(ndb.Model):
+    """Models an individual Guestbook entry."""
     author = ndb.UserProperty()
-    steps = ndb.IntegerProperty(indexed=False)
-    milesRun = ndb.FloatProperty(indexed=False)
-    cupsCoffee = ndb.IntegerProperty(indexed=False)
-    cupsWater = ndb.IntegerProperty(indexed=False)
-    foodHealthiness = ndb.IntegerProperty(indexed=False)
-    dollarsSpent = ndb.FloatProperty(indexed=False)
-    mood = ndb.IntegerProperty(indexed=False)
-    productivity = ndb.IntegerProperty(indexed=False)
-    energy = ndb.IntegerProperty(indexed=False)
+    content = ndb.StringProperty(indexed=False)
     date = ndb.DateTimeProperty(auto_now_add=True)
+# [END greeting]
 
-
+# [START main_page]
 class MainPage(webapp2.RequestHandler):
-
     def get(self):
-        db_name = self.request.get('db_name',DEFAULT_DB_NAME)
-        data_query = Data.query(ancestor=data_key(db_name)).order(-Data.date)
-        print("data_query: " + str(data_query))
-        data = data_query.fetch(10)
-        print("data: " + str(data))
-
-        
-
-        if users.get_current_user():
-            url = users.create_logout_url(self.request.uri)
-            url_linktext = 'Logout'
+        upload_url = blobstore.create_upload_url('/upload')
+        self.response.write('<html><body>')
+        # Checks for active Google account session
+        user = users.get_current_user()
+        if user:
+            self.response.write('Hello, ' + user.nickname())
         else:
-            url = users.create_login_url(self.request.uri)
-            url_linktext = 'Login'
+            self.redirect(users.create_login_url(self.request.uri))
+        url = users.create_logout_url(self.request.uri)
+        url_linktext = 'Logout'
 
-        template_values = {
-            'data': data,
-            'db_name': urllib.quote_plus(db_name),
-            'url': url,
-            'url_linktext': url_linktext,
-        }
+        # Write the submission form and the footer of the page
+        self.response.write(MAIN_PAGE_FOOTER_TEMPLATE % (upload_url, url, url_linktext))
 
-        template = JINJA_ENVIRONMENT.get_template('index.html')
-        self.response.write(template.render(template_values))
+# [END main_page]
 
-
-class LifeTracking(webapp2.RequestHandler):
-
+# [START UploadHandler]
+class UploadHandler(blobstore_handlers.BlobstoreUploadHandler):
     def post(self):
-        # We set the same parent key on the 'Data' to ensure each Data
-        # is in the same entity group. Queries across the single entity group
-        # will be consistent. However, the write rate to a single entity group
-        # should be limited to ~1/second.
-        data_name = self.request.get('data_name', DEFAULT_DB_NAME)
-        data = Data(parent=data_key(data_name))
+        upload_files = self.get_uploads('file')
+        blob_info = upload_files[0]
+        blob_reader = blobstore.BlobReader(blob_info.key())
+        json_data = blob_reader.read()
+        reporter_file = ReporterFile()
+        reporter_file.filename = blob_info.all().get().filename
+        reporter_file.author = users.get_current_user()
+        reporter_file.uploaded_file = json_data
+        reporter_file.put()
+        self.redirect("/get_my_data")
+# [END UPloadHandler]
 
-        if users.get_current_user():
-            data.author = users.get_current_user()
-
-        content = self.request.get('content').split()
-        data.steps = int(self.request.get('steps'))
-        data.milesRun = float(self.request.get('milesRun'))
-        data.cupsCoffee = int(self.request.get('cupsCoffee'))
-        data.cupsWater = int(self.request.get('cupsWater'))
-        data.foodHealthiness = int(self.request.get('foodHealthiness'))
-        data.dollarsSpent = float(self.request.get('dollarsSpent'))
-        data.mood = int(self.request.get('mood'))
-        data.productivity = int(self.request.get('productivity'))
-        data.energy = int(self.request.get('energy'))
-        data.put()
-
-        query_params = {'data_name': data_name}
-        self.redirect('/?' + urllib.urlencode(query_params))
-
-
-class EmailReminder(webapp2.RequestHandler):
-
+class GetMyData(webapp2.RequestHandler):
     def get(self):
-        """email reminders to each user to log their daily data"""
-        db_name = self.request.get('db_name',DEFAULT_DB_NAME)
-        data_query = Data.query(ancestor=data_key(db_name)).order(-Data.date)
-        user_set = set()
-        for row in data_query:
-            user_set.add(row.author)
-        for curr_user in user_set:
-            mail.send_mail(sender="me <mmjbot@gmail.com>",
-                  to=curr_user.nickname() + " " + curr_user.email(),
-                  subject="Track Your Life!",
-                  body="""
-                  This is your daily reminder to track your life! Fill out the survey at http://matt-ravi-lifetracking.appspot.com/
-                  """)
+        self.response.write('<html><body>')
+        user = users.get_current_user()
+        if user:
+            self.response.write('My Uploaded Data: </br>')
+            data_query = ReporterFile.query().order(-ReporterFile.upload_date)
+            data = data_query.fetch()
+            for data_file in data:
+                self.response.write(str(data_file.filename) + " Uploaded on " + str(data_file.upload_date) + "</br>")
+                self.response.write(data_file.uploaded_file)
+                self.response.write("</br>")
+        else:
+            self.redirect(users.create_login_url(self.request.uri))
 
+class ReporterFile(ndb.Model):
+    """Models an uploaded reporter file."""
+    author = ndb.UserProperty()
+    filename = ndb.StringProperty()
+    uploaded_file = ndb.BlobProperty()
+    upload_date = ndb.DateTimeProperty(auto_now_add=True)
+        
+# [END UploadData]
 
 application = webapp2.WSGIApplication([
     ('/', MainPage),
-    ('/sign', LifeTracking),
-    ('/tasks/email_reminder', EmailReminder)
+    ('/upload', UploadHandler),
+    ('/get_my_data', GetMyData)
 ], debug=True)
+
+
+
+
+# JINJA_ENVIRONMENT = jinja2.Environment(
+#     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
+#     extensions=['jinja2.ext.autoescape'],
+#     autoescape=True)
+
+# DEFAULT_DB_NAME = 'db'
+
+
+# class MainPage(webapp2.RequestHandler):
+
+#     def get(self):
+#         # Checks for active Google account session
+#         if users.get_current_user():
+#             url = users.create_logout_url(self.request.uri)
+#             url_linktext = 'Logout'
+#         else:
+#             url = users.create_login_url(self.request.uri)
+#             url_linktext = 'Login'
+#         # if user:
+#         #     self.response.headers['Content-Type'] = 'text/plain'
+#         #     self.response.write('Hello, ' + user.nickname())
+#         # else:
+#         #     self.redirect(users.create_login_url(self.request.uri))
+
+
+# class EmailReminder(webapp2.RequestHandler):
+
+#     def get(self):
+#         """email reminders to each user to log their daily data"""
+#         db_name = self.request.get('db_name',DEFAULT_DB_NAME)
+#         data_query = Data.query(ancestor=data_key(db_name)).order(-Data.date)
+#         user_set = set()
+#         for row in data_query:
+#             user_set.add(row.author)
+#         for curr_user in user_set:
+#             mail.send_mail(sender="me <mmjbot@gmail.com>",
+#                   to=curr_user.nickname() + " " + curr_user.email(),
+#                   subject="Track Your Life!",
+#                   body="""
+#                   This is your daily reminder to track your life! Fill out the survey at http://matt-ravi-lifetracking.appspot.com/
+#                   """)
+
+
+# application = webapp2.WSGIApplication([
+#     ('/', MainPage),
+#     ('/tasks/email_reminder', EmailReminder)
+# ], debug=True)
