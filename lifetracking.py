@@ -6,9 +6,8 @@ from google.appengine.api import users
 from google.appengine.ext import ndb
 from google.appengine.api import mail
 
-import csv
-from google.appengine.ext import blobstore
-from google.appengine.ext.webapp import blobstore_handlers
+# from google.appengine.ext import blobstore
+# from google.appengine.ext.webapp import blobstore_handlers
 
 import jinja2
 import webapp2
@@ -46,7 +45,8 @@ class Greeting(ndb.Model):
 # [START main_page]
 class MainPage(webapp2.RequestHandler):
     def get(self):
-        upload_url = blobstore.create_upload_url('/upload')
+        upload_url = "hello"
+        # upload_url = blobstore.create_upload_url('/upload')
         self.response.write('<html><body>')
         # Checks for active Google account session
         user = users.get_current_user()
@@ -63,18 +63,18 @@ class MainPage(webapp2.RequestHandler):
 # [END main_page]
 
 # [START UploadHandler]
-class UploadHandler(blobstore_handlers.BlobstoreUploadHandler):
-    def post(self):
-        upload_files = self.get_uploads('file')
-        blob_info = upload_files[0]
-        blob_reader = blobstore.BlobReader(blob_info.key())
-        json_data = blob_reader.read()
-        reporter_file = ReporterFile()
-        reporter_file.filename = blob_info.all().get().filename
-        reporter_file.author = users.get_current_user()
-        reporter_file.uploaded_file = json_data
-        reporter_file.put()
-        self.redirect("/get_my_data")
+# class UploadHandler(blobstore_handlers.BlobstoreUploadHandler):
+#     def post(self):
+        # upload_files = self.get_uploads('file')
+        # blob_info = upload_files[0]
+        # blob_reader = blobstore.BlobReader(blob_info.key())
+        # json_data = blob_reader.read()
+        # reporter_file = ReporterFile()
+        # reporter_file.filename = blob_info.all().get().filename
+        # reporter_file.author = users.get_current_user()
+        # reporter_file.uploaded_file = json_data
+        # reporter_file.put()
+        # self.redirect("/get_my_data")
 # [END UPloadHandler]
 
 
@@ -104,7 +104,7 @@ class ReporterFile(ndb.Model):
 
 application = webapp2.WSGIApplication([
     ('/', MainPage),
-    ('/upload', UploadHandler),
+    # ('/upload', UploadHandler),
     ('/get_my_data', GetMyData)
 ], debug=True)
 
