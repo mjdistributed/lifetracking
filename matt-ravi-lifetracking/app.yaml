@@ -1,0 +1,22 @@
+application: lifetracking
+version: 2
+runtime: python27
+api_version: 1
+threadsafe: true
+
+handlers:
+- url: /stylesheets
+  static_dir: stylesheets
+- url: /tasks/email_reminder
+  script: lifetracking.application
+  login: admin
+
+- url: /.*
+  script: lifetracking.application
+
+
+libraries:
+- name: webapp2
+  version: latest
+- name: jinja2
+  version: latest

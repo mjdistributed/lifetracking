@@ -1,0 +1,142 @@
+{
+  "snapshots" : [
+    {
+      "battery" : 0.8,
+      "location" : {
+        "verticalAccuracy" : 10,
+        "timestamp" : 414001864.895018,
+        "longitude" : -95.40191132267013,
+        "latitude" : 29.71150514004841,
+        "course" : 0,
+        "placemark" : {
+          "thoroughfare" : "University Blvd",
+          "postalCode" : "77030",
+          "subAdministrativeArea" : "Harris",
+          "subLocality" : "University Place",
+          "subThoroughfare" : "1801–1899",
+          "locality" : "Houston",
+          "name" : "1801–1899 University Blvd",
+          "country" : "United States",
+          "administrativeArea" : "TX"
+        },
+        "horizontalAccuracy" : 65,
+        "speed" : -1
+      },
+      "steps" : 4818,
+      "day" : 413964000,
+      "audio" : {
+        "avg" : -28.93865,
+        "peak" : -26.42936
+      },
+      "photoSet" : {
+        "photos" : [
+          {
+            "meteringMode" : 5,
+            "brightnessValue" : 4.437021,
+            "focalLengthIn35mm" : 30,
+            "longitudeRef" : "W",
+            "sceneCaptureType" : 0,
+            "exposureMode" : 0,
+            "resolutionUnit" : 2,
+            "make" : "Apple",
+            "software" : "7.0.4",
+            "assetUrl" : "assets-library:\/\/asset\/asset.JPG?id=30AAA634-BF30-4824-B72E-3B8794EF07B1&ext=JPG",
+            "isoSpeed" : 40,
+            "exposureTime" : 0.03333334,
+            "shutterSpeed" : 4.907122,
+            "depth" : 8,
+            "latitude" : 29.71103,
+            "fNumber" : 2.2,
+            "sensingMode" : 2,
+            "longitude" : 95.40196,
+            "apertureValue" : 2.275007,
+            "latitudeRef" : "N",
+            "focalLength" : 4.12,
+            "altitude" : 18.62286,
+            "exposureProgram" : 2,
+            "model" : "iPhone 5s",
+            "dateTime" : 413940868.36981,
+            "pixelWidth" : 3264,
+            "flash" : 0,
+            "orientation" : 6,
+            "pixelHeight" : 2448,
+            "whiteBalance" : 0
+          }
+        ]
+      },
+      "sync" : 0,
+      "connection" : 1,
+      "background" : 0,
+      "dwellStatus" : 0,
+      "draft" : 0,
+      "weather" : {
+        "windMPH" : 8,
+        "windDirection" : "SSE",
+        "tempF" : 50,
+        "precipTodayIn" : 0,
+        "windGustKPH" : 0,
+        "feelslikeC" : 10,
+        "visibilityMi" : 10,
+        "feelslikeF" : 50,
+        "stationID" : "KMCJ",
+        "latitude" : 29.71402931,
+        "windGustMPH" : 0,
+        "pressureIn" : 30.08,
+        "pressureMb" : 1018,
+        "relativeHumidity" : "50%",
+        "longitude" : -95.39501953,
+        "precipTodayMetric" : 0,
+        "windKPH" : 13,
+        "windDegrees" : 150,
+        "tempC" : 10,
+        "weather" : "Clear",
+        "uv" : 4,
+        "dewpointC" : 0,
+        "visibilityKM" : 16.1
+      },
+      "date" : 414001864.127277,
+      "responses" : [
+        {
+          "questionPrompt" : "How productive are you right now",
+          "answeredOptions" : [
+            "Meh"
+          ]
+        },
+        {
+          "questionPrompt" : "How do you feel",
+          "answeredOptions" : [
+            "OK"
+          ]
+        },
+        {
+          "questionPrompt" : "Are you working?",
+          "answeredOptions" : [
+            "Yes"
+          ]
+        },
+        {
+          "questionPrompt" : "What are you doing?",
+          "tokens" : [
+            "Studying"
+          ]
+        },
+        {
+          "questionPrompt" : "Where are you?",
+          "locationResponse" : {
+            "text" : "Bioscience Research Collaborative",
+            "location" : {
+              "verticalAccuracy" : -1,
+              "timestamp" : 413587018.581312,
+              "longitude" : -95.40202087807303,
+              "latitude" : 29.71125325345107,
+              "course" : 0,
+              "horizontalAccuracy" : 0,
+              "speed" : -1
+            },
+            "foursquareVenueId" : "4b0720caf964a520cff722e3"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,230 @@
+{
+  "snapshots" : [
+    {
+      "battery" : 0.85,
+      "location" : {
+        "verticalAccuracy" : 10,
+        "timestamp" : 414343149.108439,
+        "longitude" : -95.40311040634091,
+        "latitude" : 29.71479499341613,
+        "course" : 0,
+        "placemark" : {
+
+        },
+        "horizontalAccuracy" : 365.3610994504766,
+        "speed" : -1
+      },
+      "steps" : 22065,
+      "day" : 414309600,
+      "audio" : {
+        "avg" : -36.18501,
+        "peak" : -26.27221
+      },
+      "photoSet" : {
+        "photos" : [
+          {
+            "meteringMode" : 3,
+            "brightnessValue" : 5.820946,
+            "focalLengthIn35mm" : 30,
+            "longitudeRef" : "W",
+            "sceneCaptureType" : 0,
+            "exposureMode" : 0,
+            "resolutionUnit" : 2,
+            "make" : "Apple",
+            "software" : "7.0.4",
+            "assetUrl" : "assets-library:\/\/asset\/asset.JPG?id=335117A8-75E9-40FF-B214-F02E9B57EE4D&ext=JPG",
+            "isoSpeed" : 64,
+            "exposureTime" : 0.008333334,
+            "shutterSpeed" : 6.910415,
+            "depth" : 8,
+            "latitude" : 29.71074,
+            "fNumber" : 2.2,
+            "sensingMode" : 2,
+            "longitude" : 95.40117,
+            "apertureValue" : 2.275007,
+            "latitudeRef" : "N",
+            "focalLength" : 4.12,
+            "altitude" : 9.867901,
+            "exposureProgram" : 2,
+            "model" : "iPhone 5s",
+            "dateTime" : 414091191.487982,
+            "pixelWidth" : 3264,
+            "flash" : 16,
+            "orientation" : 6,
+            "pixelHeight" : 2448,
+            "whiteBalance" : 0
+          },
+          {
+            "meteringMode" : 5,
+            "brightnessValue" : 4.09788,
+            "focalLengthIn35mm" : 30,
+            "longitudeRef" : "W",
+            "sceneCaptureType" : 0,
+            "exposureMode" : 0,
+            "resolutionUnit" : 2,
+            "make" : "Apple",
+            "software" : "7.0.4",
+            "assetUrl" : "assets-library:\/\/asset\/asset.JPG?id=1B505A55-2B97-425E-8E63-17B4A47F149F&ext=JPG",
+            "isoSpeed" : 40,
+            "exposureTime" : 0.025,
+            "shutterSpeed" : 5.322506,
+            "depth" : 8,
+            "latitude" : 29.7429,
+            "fNumber" : 2.2,
+            "sensingMode" : 2,
+            "longitude" : 95.39188,
+            "apertureValue" : 2.275007,
+            "latitudeRef" : "N",
+            "focalLength" : 4.12,
+            "altitude" : 11.0476,
+            "exposureProgram" : 2,
+            "model" : "iPhone 5s",
+            "dateTime" : 414206198.716392,
+            "pixelWidth" : 3264,
+            "flash" : 0,
+            "orientation" : 6,
+            "pixelHeight" : 2448,
+            "whiteBalance" : 0
+          },
+          {
+            "meteringMode" : 5,
+            "brightnessValue" : 1.174258,
+            "focalLengthIn35mm" : 30,
+            "longitudeRef" : "W",
+            "sceneCaptureType" : 0,
+            "exposureMode" : 0,
+            "resolutionUnit" : 2,
+            "make" : "Apple",
+            "software" : "7.0.4",
+            "assetUrl" : "assets-library:\/\/asset\/asset.JPG?id=0B8126D8-4930-466D-8F63-B6E3BB1D9917&ext=JPG",
+            "isoSpeed" : 200,
+            "exposureTime" : 0.03333334,
+            "shutterSpeed" : 4.907122,
+            "depth" : 8,
+            "latitude" : 29.72952,
+            "fNumber" : 2.2,
+            "sensingMode" : 2,
+            "longitude" : 95.40423,
+            "apertureValue" : 2.275007,
+            "latitudeRef" : "N",
+            "focalLength" : 4.12,
+            "altitude" : 10.55873,
+            "exposureProgram" : 2,
+            "model" : "iPhone 5s",
+            "dateTime" : 414187102.776975,
+            "pixelWidth" : 3264,
+            "flash" : 0,
+            "orientation" : 1,
+            "pixelHeight" : 2448,
+            "whiteBalance" : 0
+          },
+          {
+            "meteringMode" : 5,
+            "brightnessValue" : 4.184147,
+            "focalLengthIn35mm" : 30,
+            "longitudeRef" : "W",
+            "sceneCaptureType" : 0,
+            "exposureMode" : 0,
+            "resolutionUnit" : 2,
+            "make" : "Apple",
+            "software" : "7.0.4",
+            "assetUrl" : "assets-library:\/\/asset\/asset.JPG?id=D4318D09-56BB-42E1-AB70-CB3AD45E6122&ext=JPG",
+            "isoSpeed" : 40,
+            "exposureTime" : 0.025,
+            "shutterSpeed" : 5.322506,
+            "depth" : 8,
+            "latitude" : 29.7429,
+            "fNumber" : 2.2,
+            "sensingMode" : 2,
+            "longitude" : 95.39188,
+            "apertureValue" : 2.275007,
+            "latitudeRef" : "N",
+            "focalLength" : 4.12,
+            "altitude" : 11.0476,
+            "exposureProgram" : 2,
+            "model" : "iPhone 5s",
+            "dateTime" : 414206197.541922,
+            "pixelWidth" : 3264,
+            "flash" : 0,
+            "orientation" : 6,
+            "pixelHeight" : 2448,
+            "whiteBalance" : 0
+          }
+        ]
+      },
+      "sync" : 0,
+      "connection" : 0,
+      "background" : 0,
+      "dwellStatus" : 0,
+      "draft" : 0,
+      "weather" : {
+        "windMPH" : 5,
+        "windDirection" : "SSW",
+        "tempF" : 69,
+        "precipTodayIn" : 0,
+        "windGustKPH" : 9.699999999999999,
+        "feelslikeC" : 20.6,
+        "visibilityMi" : 7,
+        "feelslikeF" : 69,
+        "stationID" : "KTXHOUST78",
+        "latitude" : 29.736099,
+        "windGustMPH" : 6,
+        "pressureIn" : 30.03,
+        "pressureMb" : 1017,
+        "relativeHumidity" : "86%",
+        "longitude" : -95.3871,
+        "precipTodayMetric" : 0,
+        "windKPH" : 8,
+        "windDegrees" : 202,
+        "tempC" : 20.6,
+        "weather" : "Mostly Cloudy",
+        "uv" : 1,
+        "dewpointC" : 18,
+        "visibilityKM" : 11.3
+      },
+      "date" : 414343107.637599,
+      "responses" : [
+        {
+          "questionPrompt" : "How productive are you right now",
+          "answeredOptions" : [
+            "Meh"
+          ]
+        },
+        {
+          "questionPrompt" : "How do you feel",
+          "answeredOptions" : [
+            "OK"
+          ]
+        },
+        {
+          "questionPrompt" : "Are you working?",
+          "answeredOptions" : [
+            "Yes"
+          ]
+        },
+        {
+          "questionPrompt" : "What are you doing?",
+          "tokens" : [
+            "Class"
+          ]
+        },
+        {
+          "questionPrompt" : "Where are you?",
+          "locationResponse" : {
+            "text" : "Bioscience Research Collaborative",
+            "location" : {
+              "verticalAccuracy" : -1,
+              "timestamp" : 413587018.581312,
+              "longitude" : -95.40202087807303,
+              "latitude" : 29.71125325345107,
+              "course" : 0,
+              "horizontalAccuracy" : 0,
+              "speed" : -1
+            },
+            "foursquareVenueId" : "4b0720caf964a520cff722e3"
+          }
+        }
+      ]
+    }
+  ]
+}

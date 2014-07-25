@@ -1,0 +1,164 @@
+{
+  "snapshots" : [
+    {
+      "battery" : 0.85,
+      "location" : {
+        "verticalAccuracy" : 10,
+        "timestamp" : 414605867.731251,
+        "longitude" : -95.40198492614694,
+        "latitude" : 29.71152435887359,
+        "course" : 0,
+        "placemark" : {
+          "thoroughfare" : "Travis St",
+          "postalCode" : "77030",
+          "subAdministrativeArea" : "Harris",
+          "subLocality" : "University Place",
+          "subThoroughfare" : "6501–6599",
+          "locality" : "Houston",
+          "name" : "6501–6599 Travis St",
+          "country" : "United States",
+          "administrativeArea" : "TX"
+        },
+        "horizontalAccuracy" : 65.93861951165501,
+        "speed" : -1
+      },
+      "steps" : 8932,
+      "day" : 414568800,
+      "audio" : {
+        "avg" : -29.32438,
+        "peak" : -24.72561
+      },
+      "photoSet" : {
+        "photos" : [
+          {
+            "meteringMode" : 5,
+            "brightnessValue" : 0.7078679,
+            "focalLengthIn35mm" : 30,
+            "longitudeRef" : "W",
+            "sceneCaptureType" : 0,
+            "exposureMode" : 0,
+            "resolutionUnit" : 2,
+            "make" : "Apple",
+            "software" : "7.0.4",
+            "assetUrl" : "assets-library:\/\/asset\/asset.JPG?id=CDE8197D-4FB7-4928-AFE0-B2CB18BFB1CC&ext=JPG",
+            "isoSpeed" : 320,
+            "exposureTime" : 0.05882353,
+            "shutterSpeed" : 4.09989,
+            "depth" : 8,
+            "latitude" : 29.72935,
+            "fNumber" : 2.2,
+            "sensingMode" : 2,
+            "longitude" : 95.40408,
+            "apertureValue" : 2.275007,
+            "latitudeRef" : "N",
+            "focalLength" : 4.12,
+            "altitude" : 8.827148,
+            "exposureProgram" : 2,
+            "model" : "iPhone 5s",
+            "dateTime" : 414569604.25709,
+            "pixelWidth" : 3264,
+            "flash" : 0,
+            "orientation" : 6,
+            "pixelHeight" : 2448,
+            "whiteBalance" : 0
+          }
+        ]
+      },
+      "sync" : 0,
+      "connection" : 1,
+      "background" : 0,
+      "dwellStatus" : 0,
+      "draft" : 0,
+      "weather" : {
+        "windMPH" : 7,
+        "windDirection" : "South",
+        "tempF" : 75,
+        "precipTodayIn" : 0,
+        "windGustKPH" : 32,
+        "feelslikeC" : 24,
+        "visibilityMi" : 9,
+        "feelslikeF" : 75,
+        "stationID" : "KMCJ",
+        "latitude" : 29.71402931,
+        "windGustMPH" : 20,
+        "pressureIn" : 29.82,
+        "pressureMb" : 1010,
+        "relativeHumidity" : "69%",
+        "longitude" : -95.39501953,
+        "precipTodayMetric" : 0,
+        "windKPH" : 11,
+        "windDegrees" : 190,
+        "tempC" : 24,
+        "weather" : "Mostly Cloudy",
+        "uv" : 2,
+        "dewpointC" : 18,
+        "visibilityKM" : 14.5
+      },
+      "date" : 414605867.002765,
+      "responses" : [
+        {
+          "questionPrompt" : "How productive are you right now",
+          "answeredOptions" : [
+            "Meh"
+          ]
+        },
+        {
+          "questionPrompt" : "How do you feel",
+          "answeredOptions" : [
+            "OK"
+          ]
+        },
+        {
+          "questionPrompt" : "Do you have to do what you are doing? ",
+          "answeredOptions" : [
+            "Yes"
+          ]
+        },
+        {
+          "questionPrompt" : "Do you want to do what you are doing? ",
+          "answeredOptions" : [
+            "No"
+          ]
+        },
+        {
+          "questionPrompt" : "How happy are you?",
+          "answeredOptions" : [
+            "Mid-happy"
+          ]
+        },
+        {
+          "numericResponse" : "20",
+          "questionPrompt" : "When was the last time you ate (hours)"
+        },
+        {
+          "questionPrompt" : "Are you working?",
+          "answeredOptions" : [
+            "No"
+          ]
+        },
+        {
+          "questionPrompt" : "What are you doing?",
+          "tokens" : [
+            "Class"
+          ]
+        },
+        {
+          "questionPrompt" : "Where are you?",
+          "locationResponse" : {
+            "text" : "Bioscience Research Collaborative",
+            "location" : {
+              "verticalAccuracy" : -1,
+              "timestamp" : 413587018.581312,
+              "longitude" : -95.40202087807303,
+              "latitude" : 29.71125325345107,
+              "course" : 0,
+              "horizontalAccuracy" : 0,
+              "speed" : -1
+            },
+            "foursquareVenueId" : "4b0720caf964a520cff722e3"
+          }
+        }
+      ]
+    }
+  ]
+}
